@@ -195,7 +195,7 @@
         $("#password-error").text("Passwords do not match");
         return;
       } else {
-        $("#password-error").text(""); // Clear any previous error message
+        $("#password-error").text(""); 
       }
 
       // Check if any field is empty
@@ -255,8 +255,8 @@
           $("#invitation-code").val("");
           $("#agreedToTerms").prop("checked", false);
 
-          // Redirect to login.html
-        //   window.location.href = "login.html";
+        //   Redirect to login.html
+          window.location.href = "login.html";
         },
         error: function (error) {
           // Hide the loading spinner
@@ -281,3 +281,50 @@
     });
   });
 
+
+
+//   #### LOGIN API CALL
+
+   
+$(document).ready(function () {
+    $("#login-button").click(function (e) {
+      e.preventDefault();
+
+      // Get input values
+      const identifier = $("input[name='identifier']").val();
+      const password = $("input[name='password']").val();
+
+      // Create the data object to send to the API
+      const data = {
+        identifier,
+        password,
+      };
+
+      // Make an AJAX POST request to your login API endpoint
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/api/user-login", 
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (response) {
+            // console.log(response)
+          // Store the token in local storage
+          localStorage.setItem("user_token", response.token);
+
+          // Redirect to index.html
+          window.location.href = "index.html";
+        },
+        error: function (error) {
+          console.log(error);
+
+          if (error.responseJSON && error.responseJSON.error) {
+            // Display the specific error message from the server using Toastr
+            toastr.error(error.responseJSON.error, "Login Error",toastrOptions);
+          } else {
+            // Generic error message
+            toastr.error("Login failed. Please try again.", "Login Error",toastrOptions);
+          }
+        },
+      });
+    });
+  });
