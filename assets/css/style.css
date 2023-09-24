@@ -460,6 +460,20 @@ header .navigator a {
   background-size: cover;
   box-shadow: 0 0 14px rgba(27, 154, 51, 0.2);
 }
+.amount-selected {
+  background-color: #f07b0e !important; 
+  color: white !important;
+}
+/* Custom CSS to style links inside the modal */
+#whatsappLinks a {
+  text-decoration: none;
+  color: black;
+  text-transform: capitalize;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+
+  font-size: 22px; 
+}
 
 .withdraw-page .total-balance label {
   font-weight: 500;
@@ -716,38 +730,71 @@ a.forgot-password-action {
   align-items: center;
   z-index: 9999; 
 }
-.loader {
+
+    .loader {
       width: 48px;
       height: 48px;
+      border: 5px dotted #FFF;
       border-radius: 50%;
+      display: inline-block;
       position: relative;
-      animation: rotate 1s linear infinite
-    }
-    .loader::before , .loader::after {
-      content: "";
       box-sizing: border-box;
-      position: absolute;
-      inset: 0px;
-      border-radius: 50%;
-      border: 5px solid #FFF;
-      animation: prixClipFix 2s linear infinite ;
+      animation: rotation 2s linear infinite;
     }
-    .loader::after{
-      border-color: #f28712;
-      animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
-      inset: 6px;
+    
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    } 
+
+    .show_message{
+      border-radius: 5px !important;
+      background-color: black !important;
+      padding: 0px  20px !important;
+    
+      
     }
 
-    @keyframes rotate {
-      0%   {transform: rotate(0deg)}
-      100%   {transform: rotate(360deg)}
+  #errorSuccessModal h3{
+    color: #000;
+
+  }
+
+  #errorSuccessModal h3{
+    color: #000;
+
+  }
+
+  #errorSuccessModal h5{
+    color: red;
+
+  }
+
+    .errorSuccessModal{
+      margin: auto;
+      background-color: white !important;
+      color: #847a7a !important;
+      cursor: pointer;
+      text-align: center;
+      width: 60%;
+      font-family: 'Times New Roman', Times, serif;
+      border-radius: 3px;
+      font-size: 15px;
     }
 
-    @keyframes prixClipFix {
-        0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-        25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-        50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-        75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
-        100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+hr{
+  margin-top: -10px;
+  color: rgb(221, 214, 214);
+}
+
+
+    .errorSuccessModal .modal-footerr{
+      margin-top: -6px
+    
     }
 
+  

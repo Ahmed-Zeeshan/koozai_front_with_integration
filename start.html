@@ -50,8 +50,8 @@
                 <div class="d-flex align-items-center justify-content-between">
                   <h5 class="mb-0"><strong>Starting</strong></h5>
                   <div class="d-flex align-items-center">
-                    <span>ce3dar</span>&nbsp;
-                    <img src="./assets/images/some-badge.png" width="40px" />
+                    <span id="username"></span>&nbsp;
+                    <img id="userImage" src="" alt="level image" width="40px" />
                   </div>
                 </div>
                 <div class="pt-3 pb-2 border-bottom">
@@ -65,7 +65,7 @@
                         />
                         <div class="ps-2">
                           <div class="mb-1 text-other">Today's Commission</div>
-                          <b>USDT 0</b>
+                          <b id="todayProfit">...</b>
                         </div>
                       </div>
                     </div>
@@ -88,7 +88,7 @@
                         />
                         <div class="ps-2">
                           <div class="mb-1 text-other">Total Balance</div>
-                          <b>USDT 15,671.39</b>
+                          <b id="totalBalance"></b>
                         </div>
                       </div>
                     </div>
@@ -104,7 +104,7 @@
             </div>
             <div class="drive-data mb-3">
               <button class="btn btn-lg btn-dark w-100" id="drive-data">
-                <b>Drive Data (10/50)</b>
+                <b>Drive Data</b>
               </button>
             </div>
             <div class="important-hits text-light">
@@ -158,18 +158,21 @@
             <div class="data-submission">Data Submission</div>
             <div class="row mt-5">
               <div class="col-md-12">
-                <p class="text-center text-dark mb-3">
+                <div class=" d-flex justify-content-center align-items-center">
+                  <img id="product_img" src="" style="width: 15%; height: 15%;" />
+                </div>
+                <p class="text-center text-dark fw-bold mb-3" id="product_description">
                   Fowler 54-567-009-BT XTH3 Holematic Pistol Grip Set with
                   0.080"-0.250"/2-6mm Measuring Range
                 </p>
               </div>
               <div class="col-md-6 text-center">
                 <div class="text-black-50"><small>data value</small></div>
-                <div class="text-black"><b>USDT 9,722.70</b></div>
+                <div class="text-black fw-bold" id="product_price"><b></b></div>
               </div>
               <div class="col-md-6 text-center">
                 <div class="text-black-50"><small> commission</small></div>
-                <div class="text-black"><b>USDT 9,722.70</b></div>
+                <div class="text-black fw-bold" id="product_commission"><b></b></div>
               </div>
             </div>
             <div class="row mt-5">
@@ -178,19 +181,19 @@
                   class="py-3 border-top d-flex justify-content-between align-items-center"
                 >
                   <div class="text-black-50">Creation time</div>
-                  <div>2023-07-19 17:32:58</div>
+                  <div id="creation_time"></div>
                 </div>
                 <div
                   class="py-3 border-top border-bottom d-flex justify-content-between align-items-center"
                 >
-                  <div class="text-black-50">Creation time</div>
-                  <div>2023-07-19 17:32:58</div>
+                  <div class="text-black-50">Data No.</div>
+                  <div id="data_no"></div>
                 </div>
               </div>
             </div>
             <div class="row mt-3 mb-5">
               <div class="col-md-12">
-                <button class="btn btn-theme btn-lg w-100">
+                <button class="btn btn-theme btn-lg w-100" id="submit-btn">
                   <b>Submit</b>
                 </button>
               </div>
@@ -199,9 +202,36 @@
         </div>
       </div>
     </div>
+
+   <!-- Bootstrap 5 Modal for Error and Success Messages -->
+   <div class="modal fade" id="errorSuccessModal" tabindex="-1" aria-labelledby="errorSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content errorSuccessModal ">
+            <div class="d-flex justify-content-center mt-2">
+                <h3 class="modal-title text-center" id="errorSuccessModalLabel">Koozai</h3>
+            </div>
+            <div class="modal-body">
+                <p id="errorSuccessMessage"></p>
+            </div>
+            <hr>
+            <div class="modal-footerr d-flex justify-content-center">
+                  <h5 data-dismiss="modal" id="confirmButton">Confirm</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- moment.js CDN LINK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script  src="./js/integrations/profile.js"></script>
+    <script  src="./js/integrations/start.js"></script>
+    <!-- base url file -->
+    <script src="./js/integrations/all.js"></script> 
 
     <script>
       $(document).ready(function () {
@@ -209,10 +239,25 @@
           $("#loading-gif").toggleClass("d-none");
           setTimeout(() => {
             $("#loading-gif").toggleClass("d-none");
-            $("#driveDataModal").modal("show");
+            // $("#driveDataModal").modal("show");
+          }, 200);
+        });
+      });
+
+      $(document).ready(function () {
+        $("#submit-btn").click(() => {
+          $("#loading-gif").toggleClass("d-none");
+          setTimeout(() => {
+            $("#loading-gif").toggleClass("d-none");
+            // $("#driveDataModal").modal("show");
           }, 200);
         });
       });
     </script>
+
+
+
+
+
   </body>
 </html>
