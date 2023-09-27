@@ -134,46 +134,96 @@ function showMessageModal(message, isError) {
 
 //   #### LOGIN API CALL
 
-   
+
 $(document).ready(function () {
-    $("#login-button").click(function (e) {
-      e.preventDefault();
+  $("#login-button").click(function (e) {
+    e.preventDefault();
 
-      // Get input values
-      const identifier = $("input[name='identifier']").val();
-      const password = $("input[name='password']").val();
+    // Get input values
+    const identifier = $("input[name='identifier']").val();
+    const password = $("input[name='password']").val();
 
-      // Create the data object to send to the API
-      const data = {
-        identifier,
-        password,
-      };
+    // Create the data object to send to the API
+    const data = {
+      identifier,
+      password,
+    };
 
-      // Make an AJAX POST request to your login API endpoint
-      $.ajax({
-        type: "POST",
-        url: `${baseurl}/api/user-login`, 
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (response) {
-            // console.log(response)
-          // Store the token in local storage
-          localStorage.setItem("user_token", response.token);
+    // Show the loading spinner for login
+    $("#loadingSpinner").removeClass("d-none");
 
-          // Redirect to index.html
-          window.location.href = "index.html";
-        },
-        error: function (error) {
-          // console.log(error);
+    // Make an AJAX POST request to your login API endpoint
+    $.ajax({
+      type: "POST",
+      url: `${baseurl}/api/user-login`,
+      data: JSON.stringify(data),
+      contentType: "application/json",
+      success: function (response) {
+        // Store the token in local storage
+        localStorage.setItem("user_token", response.token);
 
-          if (error.responseJSON && error.responseJSON.error) {
-            // Display the specific error message from the server using Toastr
-            showMessageModal(error.responseJSON.error, true);
-          } else {
-            // Generic error message
-            showMessageModal("Login failed. Please try again.",true);
-          }
-        },
-      });
+        // Redirect to index.html
+        window.location.href = "index.html";
+      },
+      error: function (error) {
+        if (error.responseJSON && error.responseJSON.error) {
+          // Display the specific error message from the server using Toastr
+          showMessageModal(error.responseJSON.error, true);
+        } else {
+          // Generic error message
+          showMessageModal("Login failed. Please try again.", true);
+        }
+      },
+      complete: function () {
+        // Hide the loading spinner after the request is complete
+        $("#loadingSpinner").addClass("d-none");
+      },
     });
   });
+});
+
+
+   
+// $(document).ready(function () {
+//     $("#login-button").click(function (e) {
+//       e.preventDefault();
+
+//       // Get input values
+//       const identifier = $("input[name='identifier']").val();
+//       const password = $("input[name='password']").val();
+
+//       // Create the data object to send to the API
+//       const data = {
+//         identifier,
+//         password,
+//       };
+        
+
+//       // Make an AJAX POST request to your login API endpoint
+//       $.ajax({
+//         type: "POST",
+//         url: `${baseurl}/api/user-login`, 
+//         data: JSON.stringify(data),
+//         contentType: "application/json",
+//         success: function (response) {
+//             // console.log(response)
+//           // Store the token in local storage
+//           localStorage.setItem("user_token", response.token);
+
+//           // Redirect to index.html
+//           window.location.href = "index.html";
+//         },
+//         error: function (error) {
+//           // console.log(error);
+
+//           if (error.responseJSON && error.responseJSON.error) {
+//             // Display the specific error message from the server using Toastr
+//             showMessageModal(error.responseJSON.error, true);
+//           } else {
+//             // Generic error message
+//             showMessageModal("Login failed. Please try again.",true);
+//           }
+//         },
+//       });
+//     });
+//   });

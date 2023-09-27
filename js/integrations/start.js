@@ -100,12 +100,19 @@
                   // Check if there are no errors
                   if (!response.error) {
                       // Update modal content with product details using IDs
-                      $("#product_img").attr("src", response.selected_product.product_image_url);
-                      $("#product_description").html(response.selected_product.product_description);
-                      $("#product_price").html(`USDT ${response.selected_product.product_price}`);
-                      $("#product_commission").html(`USDT ${response.commission.toFixed(2)}`);
-                      $("#creation_time").html(moment(response.selected_product.user_product_created_at).format("YYYY-MM-DD HH:mm:ss"));
-                      $("#data_no").html(`${response.selected_product.product_id}`);
+                    //   $("#product_img").attr("src", response.selected_product.product_image_url);
+                    //   $("#product_description").html(response.selected_product.product_description);
+                    //   $("#product_price").html(`USDT ${response.selected_product.product_price}`);
+                    //   $("#product_commission").html(`USDT ${response.commission.toFixed(2)}`);
+                    //   $("#creation_time").html(moment(response.selected_product.user_product_created_at).format("YYYY-MM-DD HH:mm:ss"));
+                    //   $("#data_no").html(`${response.selected_product.product_id}`);
+                    $("#product_img").attr("src", response.selected_product ? response.selected_product.product_image_url : response.merged_product.product_image_url);
+                    $("#product_description").html(response.selected_product ? response.selected_product.product_description : response.merged_product.product_description);
+                    $("#product_price").html(`USDT ${response.selected_product ? response.selected_product.product_price : response.merged_product.product_price}`);
+                    $("#product_commission").html(`USDT ${response.commission.toFixed(2)}`);
+                    $("#creation_time").html(moment(response.selected_product ? response.selected_product.user_product_created_at : response.merged_product.user_product_created_at).format("YYYY-MM-DD HH:mm:ss"));
+                    $("#data_no").html(`${response.selected_product ? response.selected_product.product_id : response.merged_product.product_id}`);
+
 
                       // Attach click event to Submit button within the modal
                       $(".btn-theme").click(function () {
@@ -118,7 +125,7 @@
                               method: "POST",
                               data: {
                                   user_id: userId,
-                                  product_id: response.selected_product.product_id,
+                                  product_id: response.selected_product ? response.selected_product.product_id : response.merged_product.product_id,
                               },
                               success: function (submitResponse) {
                                   // Update the drive data status after submitting
